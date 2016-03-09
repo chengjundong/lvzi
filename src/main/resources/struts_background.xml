@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="background" namespace="/admin" extends="struts-default">
+		<default-action-ref name="login" />
+		<action name="login" class="actionSupport">
+			<result>/WEB-INF/jsp/background/login.jsp</result>
+		</action>
+		<action name="logout" class="adminAction" method="logout">
+			<result type="redirectAction">login</result>
+		</action>
+		<action name="vcode" class="actionSupport">
+			<result>/WEB-INF/jsp/background/vcode.jsp</result>
+		</action>
+		<action name="frameset" class="actionSupport">
+			<result>/WEB-INF/jsp/background/frameset.jsp</result>
+		</action>
+		<action name="top" class="actionSupport">
+			<result>/WEB-INF/jsp/background/top.jsp</result>
+		</action>
+		<action name="left" class="adminAction" method="findPrivileges">
+			<result>/WEB-INF/jsp/background/left.jsp</result>
+		</action>
+		<action name="basicInfor" class="actionSupport">
+			<result>/WEB-INF/jsp/background/basicInfor.jsp</result>
+		</action>
+		
+		<!-- 上传溯源与资质图片 -->
+		<action name="uploadPic" class="uploadPictureAction" >
+			<result>/WEB-INF/jsp/background/uploadOriginTracePic.jsp</result>
+		</action>
+		<action name="uploadOriginTracePic" class="uploadPictureAction" >
+			<result>/WEB-INF/jsp/background/uploadOriginTracePic.jsp</result>
+		</action>
+		<action name="uploadAuthenticationPic" class="uploadPictureAction" >
+			<result>/WEB-INF/jsp/background/uploadAuthenticationPic.jsp</result>
+		</action>
+		<action name="uploadPic_*" class="uploadPictureAction" method="doUpload">
+			<result>/WEB-INF/jsp/background/{1}.jsp</result>
+		</action>
+		
+		<!-- 上传RFID批次文件并显示 -->
+		<action name="addRFIDBatch" class="uploadRfidBatchAction" method="upload" >
+			<result>/WEB-INF/jsp/background/toAddRFIDBatch.jsp</result>
+		</action>
+		<action name="toAddRFIDBatch" class="uploadRfidBatchAction" >
+			<result>/WEB-INF/jsp/background/toAddRFIDBatch.jsp</result>
+		</action>
+		<action name="rfidManagement" class="rfidManagementAction" >
+			<result>/WEB-INF/jsp/background/rfidManagement.jsp</result>
+		</action>
+		
+		<!-- 编辑溯源信息 -->
+		<action name="updateOriginTraceInfo" class="updateOriginTraceInfoAction" >
+			<result>/WEB-INF/jsp/background/updateOriginTraceInfo.jsp</result>
+		</action>
+		<action name="updateOriginTraceInfo_doUpate" class="updateOriginTraceInfoAction" method="doUpate" >
+			<result>/WEB-INF/jsp/background/updateOriginTraceInfo.jsp</result>
+		</action>
+		
+	</package>
+	
+	<package name="adminajax" namespace="/admin/ajax" extends="json-default">
+		<action name="user_*" class="adminAction" method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="rfidBatch_*" class="rfidManagementAction" method="{1}">
+			<result type="json">
+				<param name="root">page</param>
+			</result>
+		</action>
+	</package>
+
+</struts>

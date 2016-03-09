@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<bean id="actionSupport" class="com.opensymphony.xwork2.ActionSupport" scope="prototype" />
+	
+	<!-- Foreground action beans -->
+	<!-- Background action beans -->
+	<bean id="adminAction" class="com.alu.lvzi.action.background.AdminAction" scope="prototype">
+		<property name="adminService" ref="adminService" />
+		<property name="privilegeService" ref="privilegeService" />
+	</bean>
+	
+	<bean id="uploadPictureAction" class="com.alu.lvzi.action.background.UploadPictureAction" scope="prototype">
+		<property name="uploadPictureService" ref="uploadPictureService" />
+	</bean>
+	
+	<bean id="uploadRfidBatchAction" class="com.alu.lvzi.action.background.UploadRfidBatchAction" scope="prototype">
+		<property name="rfidBatchService" ref="rfidBatchService" />
+	</bean>
+	
+	<bean id="rfidManagementAction" class="com.alu.lvzi.action.background.RfidManagementAction" scope="prototype">
+		<property name="rfidBatchService" ref="rfidBatchService" />
+	</bean>
+	
+	<bean id="updateOriginTraceInfoAction" class="com.alu.lvzi.action.background.UpdateOriginTraceInfoAction" scope="prototype">
+		<property name="rfidBatchService" ref="rfidBatchService" />
+	</bean>
+	
+</beans>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<context:property-placeholder location="classpath:db.properties"/>
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver_class}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="minPoolSize" value="${jdbc.min_size}" />
+		<property name="maxPoolSize" value="${jdbc.max_size}" />
+		<property name="acquireIncrement" value="${jdbc.acquire_increment}" />
+		<property name="idleConnectionTestPeriod" value="${jdbc.idle_test_period}" />
+		<property name="maxStatements" value="${jdbc.max_statements}" />
+		<property name="initialPoolSize" value="${jdbc.min_size}" />
+	</bean>
+	
+	<bean id="adminDAO" class="com.alu.lvzi.dao.impl.AdminDAOImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="cityDAO" class="com.alu.lvzi.dao.impl.CityDAOImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="privilegeDAO" class="com.alu.lvzi.dao.impl.PrivilegeDAOImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="regionDAO" class="com.alu.lvzi.dao.impl.RegionDAOImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="rfidBatchDAO" class="com.alu.lvzi.dao.impl.RfidBatchDAOImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="rfidDAO" class="com.alu.lvzi.dao.impl.RfidDAOImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+</beans>
